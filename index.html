@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An interactive, end-to-end architecture map of the BALENSIA Python ML service."
+    />
+    <meta name="theme-color" content="#07111f" />
+    <title>BALENSIA ML Service Architecture</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="BALENSIA ML service architecture home">
+        <img class="brand-mark" src="./assets/logo-dark.png" alt="BALENSIA logo" width="38" height="38" />
+        <span>
+          <strong>BALENSIA</strong>
+          <small>ML service system map</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#architecture">Architecture</a>
+        <a href="#modules">Modules</a>
+        <a href="#workflows">Workflows</a>
+        <a href="#consistency">Lifecycle</a>
+        <a href="#boundaries">Boundaries</a>
+      </nav>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">
+        <span class="theme-icon" aria-hidden="true">◐</span>
+        <span class="theme-label">Theme</span>
+      </button>
+    </header>
+
+    <main id="main-content">
+      <section class="hero shell" id="top">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> Python ML service · architecture explorer</div>
+          <h1>The complete BALENSIA ML service, made visible.</h1>
+          <p class="hero-lede">
+            Follow an expense name through preprocessing, TF-IDF, Random Forest inference, and
+            confidence-based abstention—then trace feedback from the Express backend, immutable
+            datasets, grouped evaluation, nine validation gates, optional manual approval,
+            safe activation, rollback, reload, and recovery.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button primary" href="#architecture">Explore the system</a>
+            <a class="button secondary" href="#workflows">Trace a workflow</a>
+          </div>
+
+          <ul class="tech-list" aria-label="Core ML service technologies">
+            <li>Python</li>
+            <li>FastAPI</li>
+            <li>Scikit-Learn</li>
+            <li>MongoDB</li>
+            <li>Pandas</li>
+            <li>Joblib</li>
+            <li>Pytest</li>
+            <li>Docker</li>
+          </ul>
+        </div>
+
+        <div class="hero-map" aria-label="Simplified ML service processing loop">
+          <div class="map-orbit orbit-one" aria-hidden="true"></div>
+          <div class="map-orbit orbit-two" aria-hidden="true"></div>
+          <div class="hero-node hero-node-main">
+            <span class="node-kicker">ML service</span>
+            <strong>FastAPI</strong>
+            <small>Predict → learn → activate</small>
+          </div>
+          <div class="hero-node hero-node-query">
+            <span class="node-dot violet"></span>
+            <strong>Online inference</strong>
+            <small>TF-IDF · Random Forest · abstain</small>
+          </div>
+          <div class="hero-node hero-node-service">
+            <span class="node-dot cyan"></span>
+            <strong>Retraining lifecycle</strong>
+            <small>Snapshot · evaluate · 9 gates</small>
+          </div>
+          <div class="hero-node hero-node-result">
+            <span class="node-dot green"></span>
+            <strong>Live model state</strong>
+            <small>Bundles · active.json · approve</small>
+          </div>
+          <span class="orbit-label request-label">prediction</span>
+          <span class="orbit-label response-label">activation</span>
+        </div>
+      </section>
+
+      <section class="section shell" id="architecture">
+        <div class="section-heading">
+          <div>
+            <span class="section-index">01 / System overview</span>
+            <h2>Inference and learning meet across five responsibility layers</h2>
+          </div>
+          <p>
+            FastAPI defines the token-guarded contract, application orchestration controls
+            lifecycle state, repositories coordinate MongoDB, training code produces and
+            evaluates candidates, and the predictor manager keeps one safe model live inside
+            every process.
+          </p>
+        </div>
+
+        <div class="architecture-board">
+          <div class="board-topline">
+            <span class="live-pill"><span></span> Python runtime</span>
+            <span class="board-note">12 route operations · 8 token-guarded · 9 validation gates · 3 Mongo collections</span>
+          </div>
+
+          <div class="architecture-flow" aria-label="Five-layer ML service architecture">
+            <article class="layer-card layer-ui">
+              <div class="layer-number">01</div>
+              <span class="layer-type">Ingress & probes</span>
+              <h3>FastAPI contract</h3>
+              <p>Receives prediction, description, retraining, health, model-status, run-history, and approve or reject calls. Eight of the twelve need the operations token.</p>
+              <div class="mini-tags">
+                <span>Pydantic</span><span>Token</span><span>Request ID</span>
+              </div>
+            </article>
+
+            <div class="flow-arrow" aria-hidden="true"><span>coordinate</span></div>
+
+            <article class="layer-card layer-state">
+              <div class="layer-number">02</div>
+              <span class="layer-type">Lifecycle control</span>
+              <h3>Application orchestration</h3>
+              <p>Starts background work, persists status, heartbeats stages, pauses for approval when enabled, activates candidates, and rolls back failures.</p>
+              <div class="mini-tags">
+                <span>Thread</span><span>Status flow</span><span>Approval</span>
+              </div>
+            </article>
+
+            <div class="flow-arrow" aria-hidden="true"><span>reserve</span></div>
+
+            <article class="layer-card layer-api">
+              <div class="layer-number">03</div>
+              <span class="layer-type">Durable coordination</span>
+              <h3>Mongo repositories</h3>
+              <p>Own training runs, the singleton distributed lock, feedback reservation, retry, and finalization.</p>
+              <div class="mini-tags">
+                <span>Runs</span><span>Lock</span><span>Feedback</span>
+              </div>
+            </article>
+
+            <div class="flow-arrow" aria-hidden="true"><span>build</span></div>
+
+            <article class="layer-card layer-services">
+              <div class="layer-number">04</div>
+              <span class="layer-type">Offline candidate path</span>
+              <h3>Training, evaluation & validation</h3>
+              <p>Builds immutable data, trains an isolated candidate with grouped splits and baselines, and runs nine ordered safety gates.</p>
+              <div class="mini-tags">
+                <span>Grouped split</span><span>Metrics</span><span>9 gates</span>
+              </div>
+            </article>
+
+            <div class="flow-arrow return-arrow" aria-hidden="true"><span>publish</span></div>
+
+            <article class="layer-card layer-response">
+              <div class="layer-number">05</div>
+              <span class="layer-type">Online model state</span>
+              <h3>Bundles & runtime</h3>
+              <p>active.json selects the published bundle; each worker serves one immutable in-memory snapshot, and a legacy bundle bootstraps an empty install.</p>
+              <div class="mini-tags">
+                <span>Joblib</span><span>Manifest</span><span>Lazy reload</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="return-rail" aria-hidden="true">
+            <span class="rail-dot"></span>
+            <span class="rail-line"></span>
+            <span>A prediction response or controlled lifecycle result returns through FastAPI</span>
+          </div>
+        </div>
+
+        <div class="clarity-strip">
+          <span class="clarity-icon" aria-hidden="true">i</span>
+          <p>
+            <strong>Core idea:</strong> the model used by prediction is never overwritten in
+            place. Retraining creates a separate immutable candidate, validation decides if it
+            is publishable, an optional human can approve it, and activation swaps one complete
+            runtime snapshot at a time. The frontend never talks to this service; Express does.
+          </p>
+        </div>
+      </section>
+
+      <section class="section shell" id="modules">
+        <div class="section-heading">
+          <div>
+            <span class="section-index">02 / Module explorer</span>
+            <h2>Inspect one ML-service responsibility at a time</h2>
+          </div>
+          <p>
+            Select a module to see what it owns, how it connects to the next stage, and the
+            reliability rule that matters most.
+          </p>
+        </div>
+
+        <div class="explorer">
+          <div class="module-list" id="module-list" role="tablist" aria-label="ML service modules"></div>
+
+          <article
+            class="module-panel"
+            id="module-panel"
+            role="tabpanel"
+            aria-live="polite"
+          >
+            <div class="panel-heading">
+              <div>
+                <span class="panel-kicker" id="module-kicker">Module</span>
+                <h3 id="module-title"></h3>
+              </div>
+              <span class="ownership-badge" id="module-owner"></span>
+            </div>
+            <p class="panel-purpose" id="module-purpose"></p>
+            <div class="module-flow" id="module-flow" aria-label="Selected module flow"></div>
+            <div class="detail-callout">
+              <span>Why it matters</span>
+              <p id="module-detail"></p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="workflows">
+        <div class="section-heading">
+          <div>
+            <span class="section-index">03 / End-to-end workflows</span>
+            <h2>Trace the real execution path step by step</h2>
+          </div>
+          <p>
+            Each trace follows the actual FastAPI, predictor, repository, subprocess, artifact,
+            validation, manifest, approval, recovery, and Express call-site behavior found in
+            the repository at the audited commit.
+          </p>
+        </div>
+
+        <div class="workflow-browser">
+          <div class="workflow-selector">
+            <label for="workflow-select">Choose a workflow</label>
+            <select id="workflow-select"></select>
+            <div class="workflow-category" id="workflow-category"></div>
+          </div>
+
+          <article class="workflow-panel" aria-live="polite">
+            <div class="workflow-heading">
+              <div>
+                <span class="panel-kicker">Active trace</span>
+                <h3 id="workflow-title"></h3>
+                <p id="workflow-purpose"></p>
+              </div>
+              <div class="step-counter">
+                <span id="step-count">0</span>
+                <small>steps</small>
+              </div>
+            </div>
+            <ol class="workflow-steps" id="workflow-steps"></ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="consistency">
+        <div class="section-heading">
+          <div>
+            <span class="section-index">04 / Lifecycle state</span>
+            <h2>Every successful retrain advances four coordinated state machines</h2>
+          </div>
+          <p>
+            The run record, feedback documents, immutable artifacts, and process-local runtime
+            move separately—but activation is successful only when their ordering stays correct.
+          </p>
+        </div>
+
+        <div class="consistency-layout">
+          <div class="mutation-map">
+            <div class="mutation-row">
+              <div class="mutation-source expense-source">
+                <span>Training run</span>
+                <strong>Lifecycle status</strong>
+              </div>
+              <div class="mutation-line" aria-hidden="true"></div>
+              <div class="cache-targets">
+                <span>queued</span><span>running</span><span>evaluating</span><span>activating</span><span>activated</span><span>awaiting_approval</span><span>rejected</span><span>failed*</span>
+              </div>
+            </div>
+            <div class="mutation-row">
+              <div class="mutation-source budget-source">
+                <span>Learning data</span>
+                <strong>Feedback records</strong>
+              </div>
+              <div class="mutation-line" aria-hidden="true"></div>
+              <div class="cache-targets">
+                <span>pending</span><span>reserved</span><span>trained</span><span>pending on failure</span><span>needs_review</span>
+              </div>
+            </div>
+            <div class="mutation-row">
+              <div class="mutation-source income-source">
+                <span>Filesystem</span>
+                <strong>Model artifacts</strong>
+              </div>
+              <div class="mutation-line" aria-hidden="true"></div>
+              <div class="cache-targets">
+                <span>Dataset snapshot</span><span>Candidate bundle</span><span>Metrics + baselines</span><span>Validation result</span><span>active.json</span>
+              </div>
+            </div>
+            <div class="mutation-row">
+              <div class="mutation-source bill-source">
+                <span>Per process</span>
+                <strong>Runtime snapshot</strong>
+              </div>
+              <div class="mutation-line" aria-hidden="true"></div>
+              <div class="cache-targets">
+                <span>Legacy or active load</span><span>Generation check</span><span>Preload</span><span>Atomic swap</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="query-card">
+            <span class="panel-kicker">Current safe defaults</span>
+            <h3>Quality and retention controls are configurable</h3>
+            <code>ML_REQUIRE_MANUAL_APPROVAL = false</code>
+            <code>ML_MANIFEST_CHECK_INTERVAL_SECONDS = 5</code>
+            <code>ML_FEEDBACK_DUPLICATE_CAP = 3</code>
+            <code>Abstention threshold = 0.90 (policy file)</code>
+            <code>ML_MAX_ACCURACY_REGRESSION unset = 0.05</code>
+            <p>
+              Explicitly supplied invalid values fail startup. Missing settings use defaults.
+              The regression line is the validator's own fallback, which differs from the
+              0.02 in .env.example and config.py.
+            </p>
+            <dl>
+              <div><dt>Superseded keep</dt><dd>5 bundles</dd></div>
+              <div><dt>Rejected keep</dt><dd>3 bundles</dd></div>
+              <div><dt>Minimum age</dt><dd>7 days</dd></div>
+              <div><dt>Stale lock</dt><dd>30 minutes</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section shell">
+        <div class="section-heading compact-heading">
+          <div>
+            <span class="section-index">05 / Runtime paths</span>
+            <h2>Fast predictions stay isolated from heavyweight retraining</h2>
+          </div>
+        </div>
+
+        <div class="path-comparison">
+          <article class="path-card">
+            <div class="path-card-heading">
+              <span class="path-icon axios-icon" aria-hidden="true">P</span>
+              <div><span>Synchronous path</span><h3>Online prediction</h3></div>
+            </div>
+            <p>A request reads one already-loaded snapshot and returns without touching MongoDB.</p>
+            <ul>
+              <li>Token → Pydantic → clean text → TF-IDF → Random Forest</li>
+              <li>The vectorizer, model, and encoder come from one bundle</li>
+              <li>The abstention policy file is re-read per request</li>
+              <li>A throttled manifest check may safely reload a newer version</li>
+            </ul>
+          </article>
+
+          <article class="path-card">
+            <div class="path-card-heading">
+              <span class="path-icon fetch-icon" aria-hidden="true">T</span>
+              <div><span>Background path</span><h3>Retraining lifecycle</h3></div>
+            </div>
+            <p>An accepted request starts one lock-owning background thread and two subprocesses.</p>
+            <ul>
+              <li>Reserve feedback → snapshot → trainer → validator</li>
+              <li>Validation finishes before active.json can change</li>
+              <li>Activation or a human approval, then finalization, cleanup, and lock release</li>
+            </ul>
+          </article>
+
+          <article class="path-card">
+            <div class="path-card-heading">
+              <span class="path-icon axios-icon" aria-hidden="true">E</span>
+              <div><span>Caller path</span><h3>Express bridge</h3></div>
+            </div>
+            <p>The browser calls Express, never this service. Express adds the token and a request ID.</p>
+            <ul>
+              <li>Saved merchant rules win before any ML call</li>
+              <li>Add-expense writes feedback; a 20:30 job triggers retraining at 100 pending</li>
+              <li>Predict and describe time out at 5 seconds and fail soft</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="boundaries">
+        <div class="section-heading">
+          <div>
+            <span class="section-index">06 / Honest boundaries</span>
+            <h2>What this ML service guarantees—and where its limits are</h2>
+          </div>
+          <p>
+            These distinctions keep the service explanation accurate and make its next
+            engineering priorities visible.
+          </p>
+        </div>
+
+        <div class="boundary-categories">
+          <!-- Category 1: Guaranteed Capabilities -->
+          <div class="boundary-category">
+            <div class="boundary-category-header">
+              <div class="boundary-category-title">
+                <span class="boundary-accent-line line-true" style="background: var(--green);" aria-hidden="true"></span>
+                <h3>Guaranteed Capabilities</h3>
+              </div>
+              <p class="boundary-category-desc">Architectural guarantees and core operational safeguards enforced in code</p>
+            </div>
+            <div class="boundary-grid">
+              <article>
+                <span class="boundary-state true-state">It does</span>
+                <h3>Keep live artifacts immutable</h3>
+                <p>Retraining writes a new run-specific dataset and model bundle; it never overwrites the files currently serving predictions.</p>
+              </article>
+              <article>
+                <span class="boundary-state true-state">It does</span>
+                <h3>Fail closed on the operations token</h3>
+                <p>Eight of the twelve operations, including prediction and retraining, return 503 with no configured token and 401 with a wrong one. Only HEAD /, GET /, and the two health probes are open.</p>
+              </article>
+              <article>
+                <span class="boundary-state true-state">It does</span>
+                <h3>Recover known crash windows</h3>
+                <p>Startup reconciles orphaned runs, reserved feedback, and mid-activation state using MongoDB plus manifest and bundle evidence.</p>
+              </article>
+              <article>
+                <span class="boundary-state true-state">It does</span>
+                <h3>Abstain instead of forcing a guess</h3>
+                <p>Below 0.90 confidence the response is flagged abstained with reason low_confidence, still carries the best category, and the app shows it as a suggestion.</p>
+              </article>
+            </div>
+          </div>
+
+          <!-- Category 2: Architectural Non-Goals -->
+          <div class="boundary-category">
+            <div class="boundary-category-header">
+              <div class="boundary-category-title">
+                <span class="boundary-accent-line line-false" style="background: var(--violet);" aria-hidden="true"></span>
+                <h3>Architectural Non-Goals</h3>
+              </div>
+              <p class="boundary-category-desc">Explicit out-of-scope responsibilities handled elsewhere in the architecture</p>
+            </div>
+            <div class="boundary-grid">
+              <article>
+                <span class="boundary-state false-state">It does not</span>
+                <h3>Use an LLM for descriptions</h3>
+                <p>Description generation uses keyword rules, category templates, random selection, and one amount threshold.</p>
+              </article>
+              <article>
+                <span class="boundary-state false-state">It does not</span>
+                <h3>Produce spending forecasts</h3>
+                <p>There is no forecast route. Forecasts come from the backend's statistical report analyzer; ml-service/forecast-payload.json is a leftover sample that nothing reads.</p>
+              </article>
+              <article>
+                <span class="boundary-state false-state">It does not</span>
+                <h3>Store or expose user financial history</h3>
+                <p>Operates strictly on anonymized transaction descriptions and feedback labels. It has no access to user accounts, bank balances, or expense history.</p>
+              </article>
+            </div>
+          </div>
+
+          <!-- Category 3: Active Limits & Maintenance -->
+          <div class="boundary-category">
+            <div class="boundary-category-header">
+              <div class="boundary-category-title">
+                <span class="boundary-accent-line line-caution" style="background: var(--orange);" aria-hidden="true"></span>
+                <h3>Active Limits & Maintenance</h3>
+              </div>
+              <p class="boundary-category-desc">Current engineering boundaries, operational assumptions, and tracked technical debt</p>
+            </div>
+            <div class="boundary-grid">
+              <article>
+                <span class="boundary-state caution-state">Current limit</span>
+                <h3>Rejecting a candidate strands its feedback</h3>
+                <p>The reject endpoint sets rejected but never releases the run's reserved corrections, and startup reconciliation only releases feedback for failed, failed_validation, failed_activation, and completed runs. Those rows stay reserved.</p>
+              </article>
+              <article>
+                <span class="boundary-state caution-state">Current limit</span>
+                <h3>Approval does not take the training lock</h3>
+                <p>Approve calls the activation workflow directly. Nothing in that endpoint stops it overlapping with another run's activation, unlike the automatic path, which holds the lock throughout.</p>
+              </article>
+              <article>
+                <span class="boundary-state caution-state">Current limit</span>
+                <h3>Gates judge accuracy only</h3>
+                <p>Macro-F1, per-class results, calibration, top-k recall, and baseline comparisons are recorded but no gate reads them. With ML_MAX_ACCURACY_REGRESSION unset the validator tolerates a 0.05 drop, not the documented 0.02.</p>
+              </article>
+              <article>
+                <span class="boundary-state caution-state">Current limit</span>
+                <h3>Abstention policy is provisional</h3>
+                <p>One global 0.90 threshold from a calibration run on duplicate-heavy, partly synthetic data. All fifteen per-class slots are empty until a versioned retrain or real feedback supports them.</p>
+              </article>
+              <article>
+                <span class="boundary-state caution-state">Current limit</span>
+                <h3>Prediction errors return HTTP 200</h3>
+                <p>The inference helper catches exceptions and returns an error body that the route does not turn into a non-2xx status. Express forwards such a body to the app as a 200.</p>
+              </article>
+              <article>
+                <span class="boundary-state caution-state">Current limit</span>
+                <h3>Keyword matching is substring-based</h3>
+                <p>Short keys fire inside unrelated words: web design course gets Electricity bill, cola gets Cab ride, and steak dinner gets Tea/snack expense.</p>
+              </article>
+              <article>
+                <span class="boundary-state caution-state">Current limit</span>
+                <h3>Workers need shared storage; deploy is not in code</h3>
+                <p>Workers on one disk converge; replicas on separate disks cannot. render.yaml defines only the backend web and worker, so this service's hosting is described by the Dockerfile and /data/models volume alone.</p>
+              </article>
+              <article>
+                <span class="boundary-state caution-state">Current limit</span>
+                <h3>Background work is one thread with no timeouts</h3>
+                <p>MongoDB makes concurrency and recovery safe, but there is no durable queue. The trainer and validator subprocesses have no timeout and heartbeats fire only between stages, so a stage longer than the stale timeout can be reclaimed while still running.</p>
+              </article>
+              <article>
+                <span class="boundary-state caution-state">Current limit</span>
+                <h3>Legacy bootstrap differs from the trainer</h3>
+                <p>The fixed legacy bundle is a 100-tree forest over 2,730 features with no metadata, while the trainer builds 30 trees over up to 1,000 features. Behavior can shift at the first activation.</p>
+              </article>
+              <article>
+                <span class="boundary-state caution-state">Maintenance</span>
+                <h3>Docs and APIs have drifted</h3>
+                <p>The service README lists GET /health and /ready while the real probes are /health/live and /health/ready, .env.example says a missing MONGO_CONN fails startup (it only warns), and FastAPI on_event plus naive utcnow() remain deprecated patterns.</p>
+              </article>
+            </div>
+          </div>
+
+          <!-- Category 4: Resolved Improvements -->
+          <div class="boundary-category">
+            <div class="boundary-category-header">
+              <div class="boundary-category-title">
+                <span class="boundary-accent-line line-resolved" style="background: var(--cyan);" aria-hidden="true"></span>
+                <h3>Recently Resolved Improvements</h3>
+              </div>
+              <p class="boundary-category-desc">Production capabilities and architectural limits resolved in the audited codebase</p>
+            </div>
+              <p class="boundary-category-desc">Production capabilities and architectural limits resolved in the audited codebase</p>
+            </div>
+            <div class="boundary-grid">
+              <article>
+                <span class="boundary-state resolved-state">Resolved</span>
+                <h3>Streamlined 24 source files</h3>
+                <p>Purged 3,048 lines of dead code, obsolete exports, and verbose comments across app, db, training, and inference modules, establishing clean, maintainable contracts.</p>
+              </article>
+              <article>
+                <span class="boundary-state resolved-state">Resolved</span>
+                <h3>Multi-worker atomic reload</h3>
+                <p>PredictorManager throttled manifest checks swap predictor instances lock-free with zero downtime whenever active.json changes on disk.</p>
+              </article>
+              <article>
+                <span class="boundary-state resolved-state">Resolved</span>
+                <h3>Idempotent training run claims</h3>
+                <p>Atomic findOneAndUpdate operations and MongoDB unique index on running status prevent concurrent conflicting retrain pipelines.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta shell">
+        <div>
+          <span class="section-index">The architecture in one sentence</span>
+          <h2>Predict from one immutable snapshot. Abstain when unsure. Learn from reserved feedback. Validate, optionally approve, then publish. Roll back before risking the live model.</h2>
+        </div>
+        <a class="button primary" href="#top">Back to overview</a>
+      </section>
+    </main>
+
+    <footer class="site-footer shell">
+      <div class="brand footer-brand">
+        <img class="brand-mark" src="./assets/logo-dark.png" alt="BALENSIA logo" width="38" height="38" />
+        <span><strong>BALENSIA</strong><small>ML service architecture</small></span>
+      </div>
+      <p>Interactive technical documentation · GitHub Pages ready</p>
+    </footer>
+
+    <script src="./assets/app.js"></script>
+  </body>
+</html>
